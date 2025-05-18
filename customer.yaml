@@ -1,0 +1,67 @@
+name: Customer
+tables:
+  - name: customer_dim
+    description: Customer details,Current Address and Shipping and Sales Dates for each Customer.
+    base_table:
+      database: cortex_analyst_db
+      schema: cortex_analyst_schema
+      table: customer_dim
+    primary_key:
+      columns:
+        - C_CUSTOMER_ID
+    dimensions:
+      - name: C_SALUTATION
+        expr: C_SALUTATION
+        description: salutation for the respective customer
+        data_type: varchar
+      - name: C_FIRST_NAME
+        expr: C_FIRST_NAME
+        description: First Name of the Customer
+        data_type: varchar
+      - name: C_LAST_NAME
+        expr: C_LAST_NAME
+        description: Last Name of the Customer
+        data_type: varchar
+      - name: C_PREFERRED_CUST_FLAG
+        description: Flag which indicates if the customer is active or not
+        expr: C_PREFERRED_CUST_FLAG
+        data_type: boolean
+      - name: C_BIRTH_DAY
+        description: birth day of the customer
+        expr: C_BIRTH_DAY
+        data_type: number
+      - name: C_BIRTH_MONTH
+        description: birth month of the customer
+        expr: C_BIRTH_MONTH
+        data_type: number
+      - name: C_BIRTH_YEAR
+        description: birth year of the customer
+        expr: C_BIRTH_YEAR
+        data_type: number
+      - name: C_BIRTH_COUNTRY
+        description: birth country of the customer
+        expr: C_BIRTH_COUNTRY
+        data_type: varchar
+      - name: C_EMAIL_ADDRESS
+        synonyms:
+          - Customer Email
+          - mail
+        description: E-mail Address of the customer
+        expr: C_EMAIL_ADDRESS
+        data_type: varchar
+      - name: C_CUSTOMER_ID
+        description: Customer id of Customer
+        expr: C_CUSTOMER_ID
+        data_type: varchar
+verified_queries:
+ # For eval sample nlimtiaco_sc_6__0
+  - name: "customers name stars with F"
+    question: "List of customers whose name starts with F"
+    sql: "
+        SELECT
+          C_FIRST_NAME
+        FROM customer_dim
+        WHERE C_FIRST_NAME ilike 'F%' 
+        "
+    verified_at: 1715187400
+    verified_by: Bhaskar
